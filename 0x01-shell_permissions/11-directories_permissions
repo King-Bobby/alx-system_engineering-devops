@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -v -R 777
+chmod -v 777
