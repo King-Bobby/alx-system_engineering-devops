@@ -1,0 +1,1 @@
+Afolder on Shell redirections
