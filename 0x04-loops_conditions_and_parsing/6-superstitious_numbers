@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Script prints No 1-20, "bad luck from China" after No4,
+# "bad luck from Japan" after No9, and "bad luck from Italy" after No17
+i=1
+while ((i <= 20))
+do
+	echo "$i"
+	case "$i" in
+		4) echo "bad luck from China" ;;
+		9) echo "bad luck from Japan" ;;
+		17) echo "bad luck from Italy" ;;
+	esac
+	((i++))
+done
