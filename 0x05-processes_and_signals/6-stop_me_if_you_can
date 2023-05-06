@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Script that stops another script, without using kill command
 
-pkill "$(pgrep -f "4-to_infinity_and_beyond")"
+pkill  -f "4-to_infinity_and_beyond"
