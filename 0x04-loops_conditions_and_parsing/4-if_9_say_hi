@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#This script prints "Best School" 10 times but prints "Hi" after the 9th time
+i=0
+while ((i < 10))
+do
+	echo "Best School";
+	((i++));
+	if ((i == 9)); then echo "Hi"; fi
+done
