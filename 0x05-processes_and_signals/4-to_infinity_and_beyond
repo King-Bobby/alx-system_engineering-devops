@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Displays text infinitely with sleep 2, use Ctrl+c to stop it
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
