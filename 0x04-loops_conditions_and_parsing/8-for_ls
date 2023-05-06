@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#Prints list of filenames in directory but without the first (-) in the filenames
+List="$(ls)"
+for i in $List
+do
+	echo "$i" | cut -d "-" -f2
+done
