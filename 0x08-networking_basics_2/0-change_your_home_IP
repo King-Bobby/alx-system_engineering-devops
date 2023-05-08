@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# changes the Ip for facebook to 8.8.8.8
-
-cp /etc/hosts hosts.new
-sed -i s/8.8.8.8/facebook.com/g host.new
-cp -f hosts.new /etc/hosts
