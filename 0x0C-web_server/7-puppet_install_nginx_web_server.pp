@@ -13,7 +13,7 @@ class nginx {
 	}
 
 	file { '/var/www/html/index.html' :
-		content => Hello World!,
+		content => 'Hello World!',
 		require => Package['nginx'],
 	}
 
@@ -29,14 +29,14 @@ class nginx::redirect {
 		ensure => present,
 		content => "server {\n  listen 80;\n  server_name _;\n  return 301 https://google.com;\n}\n",
 		notify => Service['nginx'],
-  }
+	}
 
-  file { '/etc/nginx/sites-enabled/redirect':
-    ensure => link,
-    target => '/etc/nginx/sites-available/redirect',
-    require => File['/etc/nginx/sites-available/redirect'],
-    notify => Service['nginx'],
-  }
+	file { '/etc/nginx/sites-enabled/redirect':
+    	ensure => link,
+		target => '/etc/nginx/sites-available/redirect',
+		require => File['/etc/nginx/sites-available/redirect'],
+		notify => Service['nginx'],
+	}
 }
 
 include nginx
