@@ -4,8 +4,14 @@
 
 echo "Hello Holberton" > /var/www/html/index.html
 
-# Start Apache in the foreground
-apache2ctl -D FOREGROUND
+# Start Apache
+apache2ctl start
 
-docker build -t holbertonschool/265-0 .
-docker run -p 8080:80 -d holbertonschool/265-0
+# Check if Apache is running
+if apache2ctl status | grep -q "apache2 is running"; then
+    echo "Apache is running"
+    docker build -t holbertonschool/265-0 .
+    docker run -p 8080:80 -d holbertonschool/265-0
+else
+    echo "Apache failed to start"
+fi
