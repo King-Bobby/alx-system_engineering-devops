@@ -1,5 +1,6 @@
 #Using puppet, install nginx and also include resources in your manifest
 # to perform a 301 redirect when querying /redirect_me.
+
 class nginx {
     package { 'nginx':
         ensure => installed,
@@ -22,7 +23,15 @@ class nginx {
             server {
                 listen 80;
                 server_name _;
-                return 301 https://google.com;
+                root /var/www/html;
+                
+                location / {
+                    return 200 'Hello World!';
+                }
+                
+                location /redirect_me {
+                    return 301 https://google.com;
+                }
             }
         ",
         notify => Service['nginx'],
