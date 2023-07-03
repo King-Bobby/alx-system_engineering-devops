@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Configure server web_02 to be identical to your first server web_01
+
+# Install nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+# Curl Ip_address should return Hello World!
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html > /dev/null
+sudo sed -i 's|^\(listen\s\+\).*\(;.*\)|\180;\2|' /etc/nginx/sites-available/default
+
+# Create a custom 404 error page
+sudo bash -c "cat > /usr/share/nginx/html/404.html << EOF
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 Not Found</title>
+</head>
+<body>
+    <h1>404 Not Found</h1>
+    <p>Ceci n'est pas une page.</p>
+</body>
+</html>
+EOF"
+
+# Configure the redirection and the custom 404 error page
+sudo bash -c "cat > /etc/nginx/sites-available/default << EOF
+server {
+    listen 80;
+    server_name _;
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4\$request_uri;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        root /usr/share/nginx/html;
+    }
+
+    add_header X-Served-By \$hostname;
+}
+EOF"
+
+# Restart Nginx
+sudo service nginx restart
