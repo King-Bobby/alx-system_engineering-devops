@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# When you run this script with your domain name, you should get this output
+# The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
+
+get_dns_info ()
+{
+	domain=$1
+	subdomain=$2
+	if [ -z $subdomain ]
+	then
+		subdomains=("www" "lb-01" "web-01" "web-02")
+	else
+		subdomains=("$subdomain")
+	fi
+
+	for sub in "${subdomains[@]}";
+	do
+	  	record_type=$(dig +short "$sub.$domain" | awk '{ if (NR == 1) { print "A" } }')
+    		destination=$(dig +short "$sub.$domain")
+		echo "The subdomain $sub is a $record_type record and points to $destination"
+	done
+}
+get_dns_info "$1" "$2"
