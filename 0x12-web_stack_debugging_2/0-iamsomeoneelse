@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# accepts one argument, runs the whoami command 
+# under the user passed as an argument
+
+# Check if one argument is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
+fi
+
+#store the argument in username
+username="$1"
+
+# Run the whoami command under the specified user
+su -c "whoami" -s /bin/bash "$username" 
