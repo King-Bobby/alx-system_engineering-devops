@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # Reduces 1-run_nginx_as_nginx to 7lines or less
 sudo sed -i 's/#user www-data/user nginx/' /etc/nginx/nginx.conf
-chmod 700 /etc/nginx/nginx.conf
-chown nginx:nginx /etc/nginx/nginx.conf
+sudo chmod 700 /etc/nginx/nginx.conf | sudo chown nginx:nginx /etc/nginx/nginx.conf
 sudo sed -i 's/80 default_server/8080 default_server/' /etc/nginx/sites-available/default
 pkill apache2
 sudo -u nginx service nginx start
