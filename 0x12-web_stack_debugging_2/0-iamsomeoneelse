@@ -8,8 +8,5 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-#store the argument in username
-username="$1"
-
 # Run the whoami command under the specified user
-sudo -u "$username" whoami
+sudo -u "$1" whoami
