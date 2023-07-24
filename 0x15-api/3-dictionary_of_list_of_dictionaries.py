@@ -57,4 +57,3 @@ if __name__ == '__main__':
     if tasks is not None:
         filename = 'todo_all_employees.json'
         export_to_json(tasks, filename)
-        print("Data exported to {}".format(filename))
