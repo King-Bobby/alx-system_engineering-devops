@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """
-Module that gathers data from an API
+Python script to export data in the CSV format.
 """
 
-
+import csv
 import requests
 import sys
 
@@ -38,11 +38,27 @@ def fetch_employee_todo_list(employee_id):
     for task in completed_tasks:
         print(f"\t{task['title']}")
 
+    # Export data to CSV
+    csv_filename = f"{employee_id}.csv"
+    with open(csv_filename, mode='w', newline='') as csv_file:
+        fieldnames = [
+                'USER_ID', 'USERNAME',
+                'TASK_COMPLETED_STATUS', 'TASK_TITLE']
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writeheader()
+        for task in todo_list:
+            writer.writerow({
+                'USER_ID': employee_id,
+                'USERNAME': employee_data['username'],
+                'TASK_COMPLETED_STATUS': str(task['completed']),
+                'TASK_TITLE': task['title']
+            })
+
 
 if __name__ == "__main__":
     # Check if the employee ID argument is provided
     if len(sys.argv) != 2:
-        print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
+        print("Usage: python3 1-export_to_CSV.py <employee_id>")
         sys.exit(1)
 
     try:
