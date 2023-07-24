@@ -4,9 +4,9 @@ MOdule 2-export_to_JSON
 """
 
 
+import json
 import requests
 import sys
-import json
 
 
 def fetch_employee_todo_list(employee_id):
