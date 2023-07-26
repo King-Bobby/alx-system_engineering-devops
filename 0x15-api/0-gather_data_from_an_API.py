@@ -36,7 +36,7 @@ def fetch_employee_todo_list(employee_id):
     emp_name = employee_data['name']
     print(f"Employee {emp_name} is done with tasks({comp_tasks}/{tasks}):")
     for task in completed_tasks:
-        print(f"\t{task['title']}")
+        print(f"\t {task['title']}")
 
 
 if __name__ == "__main__":
